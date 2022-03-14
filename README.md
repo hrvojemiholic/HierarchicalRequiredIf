@@ -16,7 +16,7 @@ Main part of the solution is to connect Parent and Child model.
  
 2.This property is set on Parent's getter of child items:
  
- **
+ ```
  
  public IList<ItemViewModel> Items {
             get {
@@ -35,14 +35,25 @@ Main part of the solution is to connect Parent and Child model.
             set {
                 this.items = value;
             }
-        }**
+        }
+        
+        
+  ```
   
  3.  After this, attribute is applied on child ViewModel property:
   
+    ```
+  
    [RequiredIfHierarchical(parentProperty: nameof(ContainerViewModel.ItemsMustHaveValues), ignoreValues:new string [] { "False", "" }, ErrorMessage = "Required based on value of parent (ItemsMustHaveValues)")]
         public int? Value { get; set; }
+        
+     ```
   
  4. Code for server side validation is **IsValid** method of custom attribute **RequiredIfHierarchical**:
+  
+  
+    ```
+  
   
   protected override ValidationResult IsValid(object value, ValidationContext validationContext) {
 
@@ -69,8 +80,14 @@ Main part of the solution is to connect Parent and Child model.
             return ValidationResult.Success;
 
         }
+        
+        
+          ```
   
   5. Client side validation can be applied with jquery unobtrusive validation method:
+  
+  
+    ```
   
    $.validator.addMethod("requiredifhierarchical", function (value, element, params) {
 
@@ -105,6 +122,8 @@ Main part of the solution is to connect Parent and Child model.
 
         return true;
     });
+    
+      ```
   
                                               
                                               
