@@ -1,0 +1,78 @@
+﻿@page
+@using HierarchicalRequiredIf.ViewModels
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1> 
+</div>
+
+@{
+    var itemsTemplates = new List<ItemViewModel>();
+}
+
+
+
+@if (this.TempData[Model.MessageKey] != null) {
+    <div class="alert mb-0 alert-danger fade show">@Html.Raw(this.TempData[Model.MessageKey])</div>
+}
+
+
+
+<form method="post" enctype="multipart/form-data" id="najavaForm" class="position-relative">
+    
+      <div class="pb-2 fw-bold">Container:</div>
+
+    <div class="row pb-3">
+        <div class="col-2">
+            <label asp-for="Container.Name" class="control-label"></label>
+            <input asp-for="Container.Name" class="form-control" />
+            <span asp-validation-for="Container.Name" class="text-danger"></span>
+        </div>       
+    </div>
+
+     <div class="row pb-1">        
+        <div class="col-2">
+            <label asp-for="Container.ItemsMustHaveValues" class="control-label"></label>
+            <input asp-for="Container.ItemsMustHaveValues"  />
+            <span asp-validation-for="Container.ItemsMustHaveValues" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row pt-lg-3">
+        <div class="pb-2 fw-bold">Items:</div>
+        @for (int i = 0; i < Model.Container.Items.Count; i++) {
+            <div class="col-3 border m-3 p-3">
+                <div>
+                    <label asp-for="Container.Items[i].Name" class="control-label"></label>
+                    <input asp-for="Container.Items[i].Name" class="form-control" />
+                    <span asp-validation-for="Container.Items[i].Name" class="text-danger"></span>
+                </div>
+                <div>
+                    <label asp-for="Container.Items[i].Value" class="control-label"></label>
+                    <input asp-for="Container.Items[i].Value" class="form-control" />
+                    <span asp-validation-for="Container.Items[i].Value" class="text-danger"></span>
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+    <div class="row pt-3">
+        <div class="col-1">
+            <button id="btnSave" type="submit">Save</button>
+        </div>
+    </div>
+
+
+    @section Scripts
+    {
+       
+    }
+
+
+
+</form>
