@@ -16,7 +16,9 @@ Main part of the solution is to connect Parent and Child model.
  
 2.This property is set on Parent's getter of child items:
  
- **public IList<ItemViewModel> Items {
+ **
+ 
+ public IList<ItemViewModel> Items {
             get {
                 if (items != null) {
 
